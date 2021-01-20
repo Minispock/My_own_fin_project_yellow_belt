@@ -34,16 +34,5 @@ unsigned int Date::GetDay() const
 	return day;
 }
 
-bool Date::operator<(const Date& d2) const 
-{
-	if (year == d2.year)
-	{
-		if (month == d2.month)
-		{
-			return day < d2.day;
-		}
-		return month < d2.month;
-	}
-	return year < d2.year;
-}
+
 

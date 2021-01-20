@@ -14,6 +14,12 @@ string ParseEvent(istream& is)
    
 }
 
+template <typename T, typename K> 
+ostream& operator<< (ostream& out, const pair<T, K>& two) 
+{
+    return out << two.first << ' ' << two.second;
+}
+
 void TestAll();
 
 int main() {
@@ -95,4 +101,4 @@ int main() {
 //    TestRunner tr;
 //    tr.RunTest(TestParseEvent, "TestParseEvent");
 //    tr.RunTest(TestParseCondition, "TestParseCondition");
-}
+//}

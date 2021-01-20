@@ -11,20 +11,20 @@ public:
 
 	unsigned int GetYear() const;
 	unsigned int GetMonth() const;
-	unsigned int GetDay() const;
-
-	bool operator<(const Date& d2) const;
-	
+	unsigned int GetDay() const;	
 
 private:
 	unsigned int year, month, day;
 	
 };
 
-ostream& operator<<(ostream& sstream, const Date& date)
-{
-	sstream << setw(4) << setfill('0') << date.GetYear() << "-"
-		<< setw(2) << setfill('0') << date.GetMonth() << "-"
-		<< setw(2) << setfill('0') << date.GetDay();
-	return sstream;
-}
+bool operator<(const Date& lhs, const Date& rhs);
+bool operator<=(const Date& lhs, const Date& rhs);
+bool operator==(const Date& lhs, const Date& rhs);
+bool operator!=(const Date& lhs, const Date& rhs);
+bool operator>(const Date& lhs, const Date& rhs);
+bool operator>=(const Date& lhs, const Date& rhs);
+
+ostream& operator<<(ostream& out, const Date& date);
+
+Date ParseDate(istream& in);
