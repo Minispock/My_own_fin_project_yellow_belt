@@ -19,7 +19,7 @@ class Database
 {
 public:
 	void Add(const Date& date, const string& event);
-	void Print(ostream& out);
+	void Print(ostream& out) const;
 
 	template <typename T>
 	int RemoveIf(const T predicate);
