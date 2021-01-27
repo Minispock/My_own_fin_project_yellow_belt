@@ -34,5 +34,109 @@ unsigned int Date::GetDay() const
 	return day;
 }
 
+bool operator<(const Date& lhs, const Date& rhs) 
+{
+	if (lhs.GetYear() == rhs.GetYear())
+	{
+		if (lhs.GetMonth() == rhs.GetMonth())
+		{
+			return lhs.GetDay() < rhs.GetDay();
+		}
+
+		return lhs.GetMonth() < rhs.GetMonth();
+	}
+
+	return lhs.GetYear() < rhs.GetYear();
+}
+
+bool operator<=(const Date& lhs, const Date& rhs) 
+{
+	if (lhs.GetYear() == rhs.GetYear())
+	{
+		if (lhs.GetMonth() == rhs.GetMonth())
+		{
+			return lhs.GetDay() <= rhs.GetDay();
+		}
+
+		return lhs.GetMonth() < rhs.GetMonth();
+	}
+
+	return lhs.GetYear() < rhs.GetYear();
+}
+
+bool operator==(const Date& lhs, const Date& rhs) 
+{
+	return lhs.GetYear() == rhs.GetYear() && lhs.GetMonth() == rhs.GetMonth() && lhs.GetDay() == rhs.GetDay();
+}
 
 
+bool operator!=(const Date& lhs, const Date& rhs) 
+{
+	return lhs.GetYear() != rhs.GetYear() || lhs.GetMonth() != rhs.GetMonth() || lhs.GetDay() != rhs.GetDay();
+}
+
+bool operator>(const Date& lhs, const Date& rhs) 
+{
+	if (lhs.GetYear() == rhs.GetYear())
+	{
+		if (lhs.GetMonth() == rhs.GetMonth())
+		{
+			return lhs.GetDay() > rhs.GetDay();
+		}
+
+		return lhs.GetMonth() > rhs.GetMonth();
+	}
+
+	return lhs.GetYear() > rhs.GetYear();
+}
+
+bool operator>=(const Date& lhs, const Date& rhs) 
+{
+	if (lhs.GetYear() == rhs.GetYear())
+	{
+		if (lhs.GetMonth() == rhs.GetMonth())
+		{
+			return lhs.GetDay() >= rhs.GetDay();
+		}
+
+		return lhs.GetMonth() > rhs.GetMonth();
+	}
+
+	return lhs.GetYear() > rhs.GetYear();
+}
+
+ostream& operator<<(ostream& out, const Date& date) 
+{
+	out << setw(4) << setfill('0') << date.GetYear() << "-"
+		<< setw(2) << setfill('0') << date.GetMonth() << "-"
+		<< setw(2) << setfill('0') << date.GetDay();
+	return out;
+}
+
+Date ParseDate(istream& in) 
+{
+	unsigned int year, month, day;
+	if (in.peek() == '-')
+	{
+		in.get();	
+	}
+	in >> year;
+	EnsureNextCharAndSkip(in);
+	in >> month;
+	EnsureNextCharAndSkip(in);
+	in >> day;
+	if (!in.eof() || !in)
+	{
+		throw logic_error("Wrong date format");
+	}
+	return { year, month, day };
+}
+
+void EnsureNextCharAndSkip(istream& s)
+{
+	if (s.peek() != '-')
+	{
+		throw logic_error("Wrong date format");
+	}
+	s.ignore(1);
+}
