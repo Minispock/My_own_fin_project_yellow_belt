@@ -113,6 +113,15 @@ ostream& operator<<(ostream& out, const Date& date)
 	return out;
 }
 
+void EnsureNextCharAndSkip(istream& s)
+{
+	if (s.peek() != '-')
+	{
+		throw logic_error("Wrong date format");
+	}
+	s.ignore(1);
+}
+
 Date ParseDate(istream& in) 
 {
 	unsigned int year, month, day;
@@ -132,11 +141,3 @@ Date ParseDate(istream& in)
 	return { year, month, day };
 }
 
-void EnsureNextCharAndSkip(istream& s)
-{
-	if (s.peek() != '-')
-	{
-		throw logic_error("Wrong date format");
-	}
-	s.ignore(1);
-}
