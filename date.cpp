@@ -51,17 +51,7 @@ bool operator<(const Date& lhs, const Date& rhs)
 
 bool operator<=(const Date& lhs, const Date& rhs) 
 {
-	if (lhs.GetYear() == rhs.GetYear())
-	{
-		if (lhs.GetMonth() == rhs.GetMonth())
-		{
-			return lhs.GetDay() <= rhs.GetDay();
-		}
-
-		return lhs.GetMonth() < rhs.GetMonth();
-	}
-
-	return lhs.GetYear() < rhs.GetYear();
+	return !(lhs >= rhs);
 }
 
 bool operator==(const Date& lhs, const Date& rhs) 
@@ -72,26 +62,18 @@ bool operator==(const Date& lhs, const Date& rhs)
 
 bool operator!=(const Date& lhs, const Date& rhs) 
 {
-	return lhs.GetYear() != rhs.GetYear() || lhs.GetMonth() != rhs.GetMonth() || lhs.GetDay() != rhs.GetDay();
+	return !(lhs == rhs);
 }
 
 bool operator>(const Date& lhs, const Date& rhs) 
 {
-	if (lhs.GetYear() == rhs.GetYear())
-	{
-		if (lhs.GetMonth() == rhs.GetMonth())
-		{
-			return lhs.GetDay() > rhs.GetDay();
-		}
-
-		return lhs.GetMonth() > rhs.GetMonth();
-	}
-
-	return lhs.GetYear() > rhs.GetYear();
+	
+	return !(lhs < rhs);
 }
 
 bool operator>=(const Date& lhs, const Date& rhs) 
 {
+
 	if (lhs.GetYear() == rhs.GetYear())
 	{
 		if (lhs.GetMonth() == rhs.GetMonth())
