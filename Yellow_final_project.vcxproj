@@ -143,6 +143,7 @@
     <ClCompile Include="condition_parser_test.cpp" />
     <ClCompile Include="database.cpp" />
     <ClCompile Include="date.cpp" />
+    <ClCompile Include="node.cpp" />
     <ClCompile Include="token.cpp" />
     <ClCompile Include="Yellow_final_project.cpp" />
   </ItemGroup>

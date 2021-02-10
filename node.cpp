@@ -23,7 +23,7 @@ bool DateComparisonNode::Evaluate(const Date& date, const string& event)
 	case Comparison::NotEqual:
 		return m_date != date;
 	default:
-		break;
+		return;
 	}
 }
 
@@ -47,7 +47,7 @@ bool EventComparisonNode::Evaluate(const Date& date, const string& event)
 	case Comparison::NotEqual:
 		return m_event != event;
 	default:
-		break;
+		return;
 	}
 }
 
@@ -63,7 +63,7 @@ bool LogicalOperationNode::Evaluate(const Date& date, const string& event)
 	case LogicalOperation::And:
 		return m_left->Evaluate(date, event) && m_right->Evaluate(date, event);
 	default:
-		break;
+		return;
 	}
 }
 
