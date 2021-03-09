@@ -51,14 +51,13 @@ bool operator<(const Date& lhs, const Date& rhs)
 
 bool operator<=(const Date& lhs, const Date& rhs) 
 {
-	return !(lhs >= rhs);
+	return !(lhs > rhs);
 }
 
 bool operator==(const Date& lhs, const Date& rhs) 
 {
 	return lhs.GetYear() == rhs.GetYear() && lhs.GetMonth() == rhs.GetMonth() && lhs.GetDay() == rhs.GetDay();
 }
-
 
 bool operator!=(const Date& lhs, const Date& rhs) 
 {
@@ -68,23 +67,21 @@ bool operator!=(const Date& lhs, const Date& rhs)
 bool operator>(const Date& lhs, const Date& rhs) 
 {
 	
-	return !(lhs < rhs);
-}
-
-bool operator>=(const Date& lhs, const Date& rhs) 
-{
-
 	if (lhs.GetYear() == rhs.GetYear())
 	{
 		if (lhs.GetMonth() == rhs.GetMonth())
 		{
-			return lhs.GetDay() >= rhs.GetDay();
+			return lhs.GetDay() > rhs.GetDay();
 		}
-
 		return lhs.GetMonth() > rhs.GetMonth();
 	}
 
 	return lhs.GetYear() > rhs.GetYear();
+}
+
+bool operator>=(const Date& lhs, const Date& rhs) 
+{
+	return !(lhs < rhs);
 }
 
 ostream& operator<<(ostream& out, const Date& date) 
@@ -95,14 +92,6 @@ ostream& operator<<(ostream& out, const Date& date)
 	return out;
 }
 
-void EnsureNextCharAndSkip(istream& s)
-{
-	if (s.peek() != '-')
-	{
-		throw logic_error("Wrong date format");
-	}
-	s.ignore(1);
-}
 
 Date ParseDate(istream& in) 
 {
@@ -112,14 +101,11 @@ Date ParseDate(istream& in)
 		in.get();	
 	}
 	in >> year;
-	EnsureNextCharAndSkip(in);
+	in.ignore(1);
 	in >> month;
-	EnsureNextCharAndSkip(in);
+	in.ignore(1);
 	in >> day;
-	if (!in.eof() || !in)
-	{
-		throw logic_error("Wrong date format");
-	}
+
 	return { year, month, day };
 }
 
