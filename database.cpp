@@ -9,7 +9,25 @@ using namespace std;
 
 void Database::Add(const Date& date, const string& event)
 {
-	events[date].push_back(event);
+	if (events.count(date))
+	{
+		for (auto ev: events)
+		{
+			for (auto it = ev.second.begin(); it != ev.second.end(); it ++)
+			{
+				if (*it != event)
+				{
+					events[date].push_back(event);
+				}
+			}
+		}
+	}
+	else
+	{
+		events[date].push_back(event);
+	}
+	
+
 }
 
 void Database::Print(ostream& out) const

@@ -25,7 +25,6 @@ bool DateComparisonNode::Evaluate(const Date& date, const string& event)
 	default:
 		return false;
 	}
-
 	return false;
 }
 
@@ -73,5 +72,5 @@ bool LogicalOperationNode::Evaluate(const Date& date, const string& event)
 
 bool EmptyNode::Evaluate(const Date& date, const string& event) 
 {
-	return true;
+	throw logic_error("The EmptyNode has problems");
 }
