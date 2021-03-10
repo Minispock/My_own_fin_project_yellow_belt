@@ -26,8 +26,6 @@ void Database::Add(const Date& date, const string& event)
 	{
 		events[date].push_back(event);
 	}
-	
-
 }
 
 void Database::Print(ostream& out) const
